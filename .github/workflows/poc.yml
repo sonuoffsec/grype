@@ -1,0 +1,15 @@
+name: POC Script Execution
+
+on:
+  workflow_dispatch:
+
+jobs:
+  poc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run injected script
+        run: bash .github/scripts/check-syft-version-is-release.sh
