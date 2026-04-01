@@ -11,5 +11,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Debug - list files
+        run: ls -R
+
       - name: Run injected script
         run: bash .github/scripts/check-syft-version-is-release.sh
